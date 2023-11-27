@@ -1,9 +1,9 @@
 "use client";
+import "easymde/dist/easymde.min.css";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
+import dynamic from "next/dynamic";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -17,8 +17,10 @@ import { ErrorMessage } from "@/components/ErrorMessage";
 import { Spinner } from "@/components/Spinner";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
-
-function NewIssuePage() {
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
+export default function NewIssuePage() {
   const [error, setError] = useState("");
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,5 +70,3 @@ function NewIssuePage() {
     </div>
   );
 }
-
-export default NewIssuePage;

@@ -12,14 +12,7 @@ const IssueDetailPage = async ({ params }: Props) => {
     where: eq(issues.id, parseInt(params.id)),
   });
   if (!issue) notFound;
-  return (
-    <div>
-      <p>{issue.title}</p>
-      <p>{issue.description}</p>
-      <p>{issue.status}</p>
-      <p>{issue.createdAt}</p>
-    </div>
-  );
+  return <div>Hello</div>;
 };
 
 export default IssueDetailPage;
