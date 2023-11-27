@@ -21,8 +21,6 @@ export function IssueStatusBadge({ status }: IssueStatusBadgeProps) {
   if (status === null) {
     return <Badge color="gray">Unknown</Badge>;
   }
-
-  // Handle the case where status is a valid Status value
   return (
     <Badge color={statusMap[status].color}>{statusMap[status].label}</Badge>
   );
