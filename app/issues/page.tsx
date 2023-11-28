@@ -1,11 +1,11 @@
 import React from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { db } from "@/app/db/index";
 import { issues } from "@/app/db/schema";
 import { drizzle } from "drizzle-orm/mysql2";
 import { Status } from "@/app/db/schema";
 import delay from "delay";
+import Link from "@/components/Link";
 import {
   Table,
   TableBody,
@@ -33,7 +33,7 @@ async function IssuesPage() {
           {all_issues.map((issue) => (
             <TableRow key={issue.id}>
               <TableCell>
-                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                <Link href={`/issues/${issue.id}`}>{String(issue.title)}</Link>
                 <div className="block md:hidden">
                   <IssueStatusBadge status={issue.status} />
                 </div>

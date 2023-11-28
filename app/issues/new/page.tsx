@@ -1,20 +1,19 @@
 "use client";
-import "easymde/dist/easymde.min.css";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import dynamic from "next/dynamic";
-import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Toaster, toast } from "sonner";
-import { Alert } from "@/components/ui/alert";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/ValidationSchemas";
-import { z } from "zod";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Spinner } from "@/components/Spinner";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Toaster } from "sonner";
+import { z } from "zod";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
