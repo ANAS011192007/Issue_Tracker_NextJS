@@ -59,3 +59,8 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  .nav-link {
+    @apply text-zinc-500 hover:text-zinc-900 transition-colors
+  }
+}

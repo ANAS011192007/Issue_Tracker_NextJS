@@ -15,6 +15,13 @@
       "when": 1700818506545,
       "tag": "0001_cuddly_menace",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1701314040988,
+      "tag": "0002_left_mantis",
+      "breakpoints": true
     }
   ]
 }

@@ -2,7 +2,12 @@
 
 import React from "react";
 import { Badge } from "@radix-ui/themes";
-import { Status } from "@/app/db/schema"; // Adjust the path
+
+enum Status {
+  OPEN = "OPEN",
+  IN_PROGRESS = "IN_PROGRESS",
+  CLOSED = "CLOSED",
+}
 
 interface IssueStatusBadgeProps {
   status: "OPEN" | "IN_PROGRESS" | "CLOSED" | null;

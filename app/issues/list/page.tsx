@@ -1,11 +1,6 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
 import { db } from "@/app/db/index";
-import { issues } from "@/app/db/schema";
-import { drizzle } from "drizzle-orm/mysql2";
-import { Status } from "@/app/db/schema";
-import delay from "delay";
 import Link from "@/components/Link";
+import { IssueStatusBadge } from "@/components/badge";
 import {
   Table,
   TableBody,
@@ -14,7 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IssueStatusBadge } from "@/components/badge";
 import IssueActions from "./IssueActions";
 async function IssuesPage() {
   const all_issues = await db.query.issues.findMany();
@@ -51,5 +45,5 @@ async function IssuesPage() {
     </div>
   );
 }
-
+export const dynamic = "force-dynamic";
 export default IssuesPage;
