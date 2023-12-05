@@ -15,7 +15,14 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
+import { MdDeleteForever } from "react-icons/md";
+const DeleteIssueButton = ({
+  issueId,
+  issueHomepage,
+}: {
+  issueId: number;
+  issueHomepage: boolean;
+}) => {
   const router = useRouter();
   const [error, setError] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -30,12 +37,17 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
       setError(true);
     }
   };
+
   return (
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button disabled={isDeleting} variant="destructive">
-            Delete Issue
+          <Button
+            className={issueHomepage ? "w-12 ml-1" : ""}
+            disabled={isDeleting}
+            variant="destructive"
+          >
+            {issueHomepage ? <MdDeleteForever /> : "Delete Issue"}
             {isDeleting && <Spinner />}
           </Button>
         </AlertDialogTrigger>

@@ -7,16 +7,22 @@ import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
 import DeleteIssueButton from "./DeleteIssueButton";
 import { getServerSession } from "next-auth";
-import AssigneeSelect from "@/components/AssigneeSelect";
+import { Metadata } from "next";
+import { cache } from "react";
+// import AssigneeSelect from "@/components/AssigneeSelect";
 interface Props {
   params: { id: string };
 }
+const fetchUser = cache((issueId: number) => {
+  return db.query.issues.findFirst({
+    where: eq(issues.id, issueId),
+  });
+});
+
 const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession();
   // if (typeof params.id !== "number") notFound();
-  const issue = await db.query.issues.findFirst({
-    where: eq(issues.id, parseInt(params.id)),
-  });
+  const issue = await fetchUser(parseInt(params.id));
   if (issue === undefined) notFound();
 
   return (
@@ -27,9 +33,9 @@ const IssueDetailPage = async ({ params }: Props) => {
       {session && (
         <Box>
           <div className="flex flex-col gap-4">
-            <AssigneeSelect />
-            <EditIssueButton issueId={issue.id} />
-            <DeleteIssueButton issueId={issue.id} />
+            {/* <AssigneeSelect /> */}
+            <EditIssueButton issueHomepage={false} issueId={issue.id} />
+            <DeleteIssueButton issueHomepage={false} issueId={issue.id} />
           </div>
         </Box>
       )}
@@ -38,3 +44,11 @@ const IssueDetailPage = async ({ params }: Props) => {
 };
 
 export default IssueDetailPage;
+
+export async function generateMetadata({ params }: Props) {
+  const issue = await fetchUser(parseInt(params.id));
+  return {
+    title: issue?.title,
+    description: "Details of issue" + issue?.id,
+  };
+}
